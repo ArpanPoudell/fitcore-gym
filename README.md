@@ -1,73 +1,232 @@
-# Welcome to your Lovable project
+# 🏋️ Fitcore Gym — Gym Management System
 
-## Project info
+A modern web-based gym management platform designed to simplify membership administration, attendance tracking, payment records, and member engagement.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Fitcore Gym provides dedicated interfaces for administrators and gym members, bringing essential gym operations together in a single application.
 
-## How can I edit this code?
+## ✨ Key Features
 
-There are several ways of editing your application.
+### 👤 Authentication & User Management
+- User registration and login.
+- Session management.
+- Separate administrator and member experiences.
+- Member profile management.
 
-**Use Lovable**
+### 📊 Admin Dashboard
+- Overview of gym membership and activity.
+- Member statistics and membership information.
+- Revenue and member-growth visualizations.
+- Membership expiry monitoring.
+- Access to gym management features.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### 💪 Member Dashboard
+- View membership information and status.
+- Track gym attendance.
+- Monitor attendance streaks.
+- View payment records.
+- Access personal profile information and notifications.
 
-Changes made via Lovable will be committed automatically to this repo.
+### 💳 Payment Management
+- Payment-related interface and record management.
+- Demo payment flow for demonstrating the payment experience.
+- **Payment status:** Only demo payments are currently implemented. Real payment gateway integration and live financial transactions are not supported yet.
 
-**Use your preferred IDE**
+### 🎨 User Interface
+- Modern, responsive design.
+- Reusable UI components.
+- Dashboard-oriented layouts.
+- Interactive charts and visualizations.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Technology Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+| Technology | Purpose |
+|---|---|
+| React 18 | Frontend user interface |
+| TypeScript | Type-safe development |
+| Vite | Development server and production build |
+| Tailwind CSS | Styling and responsive design |
+| shadcn/ui | Reusable UI components |
+| Radix UI | Accessible UI primitives |
+| React Router | Client-side navigation |
+| Supabase | Authentication and backend/database services |
+| TanStack Query | Server-state and data-fetching management |
+| Recharts | Charts and data visualization |
+| Vitest | Automated testing |
 
-Follow these steps:
+## 🏗️ Application Architecture
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Fitcore Gym follows a frontend-driven architecture in which the React application communicates with Supabase for supported authentication and database operations.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+```text
+                  ┌────────────────────────┐
+                  │        Users           │
+                  │  Admins and Members    │
+                  └───────────┬────────────┘
+                              │
+                              ▼
+                  ┌────────────────────────┐
+                  │     React Frontend      │
+                  │   TypeScript + Vite     │
+                  └───────────┬────────────┘
+                              │
+               ┌──────────────┼──────────────┐
+               │              │              │
+               ▼              ▼              ▼
+       ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+       │ Authentication│ │ Dashboards  │ │ UI & Charts │
+       │ & User Access │ │ Admin/Member│ │ Components  │
+       └─────────────┘ └─────────────┘ └─────────────┘
+               │              │
+               └──────────────┤
+                              ▼
+                  ┌────────────────────────┐
+                  │        Supabase        │
+                  │ Authentication & Data  │
+                  └────────────────────────┘
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+**Architecture overview:**
+- **Presentation layer:** React, TypeScript, Tailwind CSS, and reusable components.
+- **Navigation layer:** React Router manages application routes.
+- **Data-fetching layer:** TanStack Query manages server-state operations.
+- **Backend services:** Supabase provides the configured authentication and database services.
+- **Visualization layer:** Recharts supports dashboard analytics.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+The application does not require a separate Express server for the architecture described above. Payment processing currently uses a demo flow rather than a live payment gateway.
+
+## 📁 Project Structure
+
+```text
+fitcore-gym/
+├── public/                  # Static assets
+├── src/
+│   ├── components/          # Reusable UI components
+│   ├── integrations/
+│   │   └── supabase/        # Supabase client integration
+│   ├── pages/               # Application pages
+│   ├── hooks/               # Custom React hooks
+│   ├── lib/                 # Utilities and shared logic
+│   ├── App.tsx              # Application routes and structure
+│   └── main.tsx             # Application entry point
+├── supabase/
+│   ├── migrations/          # Database migration files
+│   └── config.toml          # Supabase configuration
+├── package.json             # Dependencies and npm scripts
+├── package-lock.json        # Dependency lockfile
+├── vite.config.ts           # Vite configuration
+├── tailwind.config.ts       # Tailwind CSS configuration
+├── tsconfig.json            # TypeScript configuration
+├── vitest.config.ts         # Testing configuration
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Install the following tools:
+
+- Node.js
+- npm
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ArpanPoudell/fitcore-gym.git
+```
+
+### 2. Navigate to the project directory
+
+```bash
+cd fitcore-gym
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure environment variables
+
+Create a `.env` file in the project root.
+
+Add the environment variables required by the Supabase client and other configured integrations. Use the exact variable names expected by the source code.
+
+For example, a typical Supabase client configuration may use:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+```
+
+**Important:** These names are examples. Confirm the actual names in the project's configuration before running the application.
+
+Never commit your `.env` file, private credentials, or service-role keys to GitHub.
+
+### 5. Start the development server
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open the local address printed in the terminal to access the application.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📜 Available Commands
 
-**Use GitHub Codespaces**
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Build the application for production |
+| `npm run build:dev` | Create a development-mode build |
+| `npm run lint` | Run ESLint checks |
+| `npm run test` | Run the Vitest test suite |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run preview` | Preview the production build |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 💰 Payment Implementation Status
 
-## What technologies are used for this project?
+Fitcore Gym currently includes a **demo payment flow** to demonstrate the payment-related user experience.
 
-This project is built with:
+| Capability | Status |
+|---|---|
+| Payment interface | Implemented |
+| Demo payment flow | Implemented |
+| Live payment gateway | Not implemented |
+| Real-money transactions | Not supported |
+| Production payment verification | Not implemented |
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+A production payment system would require integrating a suitable payment provider, securely verifying transactions on the backend, and handling payment success, failure, and reconciliation.
 
-## How can I deploy this project?
+## 🔐 Security Considerations
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- Keep environment variables and credentials out of version control.
+- Use appropriate database access policies.
+- Enforce authorization for administrator-only operations.
+- Do not rely solely on frontend role checks to protect sensitive data.
+- Keep private service-role credentials out of browser-accessible code.
+- Use verified backend payment processing before introducing real-money transactions.
 
-## Can I connect a custom domain to my Lovable project?
+## 🔮 Future Enhancements
 
-Yes, you can!
+Potential improvements include:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- Integration with a real payment gateway.
+- Automated membership renewal and expiry notifications.
+- Advanced attendance and membership analytics.
+- Workout planning and progress tracking.
+- Enhanced administrative reporting.
+- Improved production deployment and security controls.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 👨‍💻 Developer
+
+**Arpan Poudel**
+
+Computer Science and Engineering
+
+GitHub: ArpanPoudell
+
+---
+
+*Fitcore Gym — Simplifying gym management through technology.*
